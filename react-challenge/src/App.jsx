@@ -1,6 +1,5 @@
 import React from 'react'
 import './index.css'
-import axios from 'axios'
 import AnimeList from './components/AnimeList'
 
 class App extends React.Component {
@@ -26,8 +25,19 @@ class App extends React.Component {
     console.log(searchAnime)
   }
 
-  showAnimeDetails (anime) {
-    console.log(anime);
+  async showAnimeDetails (id) {
+    console.log(id);
+    try {
+      const response = await fetch(`https://api.jikan.moe/v3/anime/${id}`)
+      const anime = await response.json()
+      console.log(anime.title)
+      console.log(this)
+      // this.setState({
+      //   anime: anime
+      // })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   deleteAnime (index) {
@@ -44,33 +54,20 @@ class App extends React.Component {
     // })
   }
 
-  componentDidMount() {
-    // fetch('https://api.jikan.moe/v3/season/2020/winter',{
-    //   method: 'get'
-    // })
-    //   .then(response => {
-    //     console.log(response, 'success')
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    axios({
-      baseURL: 'https://api.jikan.moe/v3/season/2018/winter',
-      method: 'GET'
-    })
-      .then(({data}) => {
-        const animes = []
-        for (let i = 0; i < 10; i++) {
-          animes.push(data.anime[i])
-        }
-        this.setState({
-          animeList: animes
-        })
-        console.log(this.state.animeList, 'success')
+  async componentDidMount() {
+    try {
+      const response = await fetch('https://api.jikan.moe/v3/season/2020/summer')
+      const animes = await response.json()
+      const animeList = []
+      for (let i = 0; i < 10; i++) {
+        animeList.push(animes.anime[i])
+      }
+      this.setState({
+        animeList: animeList
       })
-      .catch(err => {
-        console.log(err)
-      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   render() {
@@ -88,6 +85,7 @@ class App extends React.Component {
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <p>{ searchAnime }</p>
+          {/* <p>{ JSON.stringify(animeList) }</p> */}
 
           <AnimeList 
             animeList={ animeList } 

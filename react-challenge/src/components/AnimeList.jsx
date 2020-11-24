@@ -12,7 +12,7 @@ class AnimeList extends React.Component {
                 <img src={ anime.image_url } className="card-img-top" alt="..."/>
                 <div className='card-body'>
                   <div>{ anime.title }</div>
-                  <button onClick={ () => showAnimeDetails(anime) } className='btn btn-info'>Details</button>
+                  <button onClick={ () => showAnimeDetails(anime.mal_id) } className='btn btn-info'>Details</button>
                   <button onClick={ () => deleteAnime(i) } className='btn btn-danger'>Delete</button>
                 </div>
               </div>
