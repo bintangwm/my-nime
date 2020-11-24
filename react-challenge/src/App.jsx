@@ -1,101 +1,77 @@
-import React from 'react'
-import './index.css'
-import AnimeList from './components/AnimeList'
+import React, { useEffect, useState } from 'react'
+import './App.css'
+import AnimeList from './pages/AnimeList'
+import AnimeDetail from './pages/AnimeDetail'
+import Navbar from './components/Navbar'
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      pageName: 'Anime List - Page',
-      animeList: [],
-      searchAnime: '',
-      anime: {}
+function App() {
+  const [animeList, setAnimeList] = useState([])
+  const [anime, setAnime] = useState({})
+  const [searchAnime, setSearchAnime] = useState('')
+
+  useEffect(() => {
+    console.log('fetch data')
+    async function fetchAnimeList() {
+      try {
+        const response = await fetch('https://api.jikan.moe/v3/season/2020/summer')
+        const animes = await response.json()
+        const newAnimeList = []
+        for (let i = 0; i < 12; i++) {
+          newAnimeList.push(animes.anime[i])
+        }
+        setAnimeList(newAnimeList)
+        // setAnimeList(animes.anime)
+      } catch (err) {
+        console.log(err)
+      }
     }
+    fetchAnimeList()
+  }, [])
+
+  function changeSearchAnime(e) {
+    setSearchAnime(e.target.value)
   }
 
-  changeSearchAnime (event) {
-    this.setState({
-      searchAnime: event.target.value
-    })
-  }
-
-  proceedSearchAnime (event) {
-    event.preventDefault()
-    const { searchAnime } = this.state
+  function proceedSearchAnime(e) {
+    e.preventDefault()
     console.log(searchAnime)
   }
 
-  async showAnimeDetails (id) {
-    console.log(id);
+  function deleteAnime(index) {
+    const newAnimeList = animeList.filter((anime, i) => i !== index )
+    setAnimeList(newAnimeList)
+  }
+
+  async function showAnimeDetails(id) {
     try {
       const response = await fetch(`https://api.jikan.moe/v3/anime/${id}`)
-      const anime = await response.json()
-      console.log(anime.title)
-      console.log(this)
-      // this.setState({
-      //   anime: anime
-      // })
+      const fetchedAnime = await response.json()
+      setAnime(fetchedAnime)
+      console.log(anime)
     } catch (err) {
       console.log(err)
     }
   }
 
-  deleteAnime (index) {
-    console.log(index);
-    // const { animeList } = this.state
-    // const newAnimeList = animeList.map(anime => {
-    //   return anime
-    // })
-
-    console.log(this)
-    // newAnimeList.splice(index, 1)
-    // this.setState({
-    //   animeList: newAnimeList
-    // })
-  }
-
-  async componentDidMount() {
-    try {
-      const response = await fetch('https://api.jikan.moe/v3/season/2020/summer')
-      const animes = await response.json()
-      const animeList = []
-      for (let i = 0; i < 10; i++) {
-        animeList.push(animes.anime[i])
-      }
-      this.setState({
-        animeList: animeList
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  render() {
-    const { pageName, animeList, searchAnime } = this.state
-    return (
-      <React.Fragment>
-        <div className="container">
-          <h1>{ pageName }</h1>
-          <form onSubmit={ (event) => this.proceedSearchAnime(event) } className="form-inline">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-              value={ searchAnime }
-              // onChange={this.changePageName.bind(this)}
-              onChange={(event) => this.changeSearchAnime(event)}
-            />
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-          <p>{ searchAnime }</p>
-          {/* <p>{ JSON.stringify(animeList) }</p> */}
-
-          <AnimeList 
-            animeList={ animeList } 
-            showAnimeDetails={ this.showAnimeDetails }  
-            deleteAnime={ this.deleteAnime }
-          />
-        </div>
-      </React.Fragment>
-    )
-  }
+  return (
+    <section>
+      <Navbar
+        searchAnime={ searchAnime }
+        proceedSearchAnime= { proceedSearchAnime }
+        changeSearchAnime= { changeSearchAnime }
+      />
+      <div className="container">
+        <AnimeDetail
+          anime={ anime }
+        />
+        <AnimeList
+          animeList={animeList}
+          deleteAnime={deleteAnime}
+          showAnimeDetails={showAnimeDetails}
+        />
+      </div>
+    </section>
+  )
 }
 
 export default App
