@@ -1,24 +1,51 @@
 import React from 'react'
+import AnimeItem from '../components/AnimeItem'
+import useFetch from '../helpers/useFetch'
 
 function AnimeList(props) {
-  const { animeList, showAnimeDetails, deleteAnime } = props
+  const { goToShowAnimeDetails } = props
+  // const [animeList, setAnimeList] = useState([])
+
+  const [animeList, loading] = useFetch(
+    'https://api.jikan.moe/v3/season/2020/summer',
+    'animeList'
+  )
+
+  if (loading) {
+    return (
+      <div className="animeDetail container mb-3">
+        <h2>Anime Detail</h2>
+        <hr/>
+        <div className="alert alert-info" role="alert">
+          Loading your data...
+        </div>
+      </div>
+    )
+  } else if (animeList.length === 0) {
+    return (
+      <div className="animeDetail container mb-3">
+        <h2>Anime Detail</h2>
+        <hr/>
+        <div className="alert alert-danger" role="alert">
+          There's a problem fetching data, please contact developer!
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className="animeList">
+    <div className="container-fluid mb-3">
       <h2>Anime List</h2>
       <hr/>
       <div className="row">
         {
           animeList.map((anime, i) => (
-            <div key={anime.mal_id} className="col-3">
-              <div className="card mb-3">
-                <img src={ anime.image_url } className="card-img-top" alt="..."/>
-                <div className='card-body'>
-                  <div>{ anime.title }</div>
-                  <button onClick={ () => showAnimeDetails(anime.mal_id) } className='btn btn-info'>Details</button>
-                  <button onClick={ () => deleteAnime(i) } className='btn btn-danger'>Delete</button>
-                </div>
-              </div>
-            </div>  
+            <AnimeItem
+              key={anime.mal_id}
+              i={i}
+              anime={anime}
+              goToShowAnimeDetails={goToShowAnimeDetails}
+            /> 
           ))
         }
       </div>
