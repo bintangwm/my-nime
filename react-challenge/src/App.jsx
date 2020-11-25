@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnimeDetails, AnimeList, AnimeSearch } from './pages/index'
+import { AnimeDetails, AnimeList, AnimeSearch, AnimeFavorites } from './pages/index'
 import { Navbar } from './components/index'
 import { Switch, Route } from 'react-router-dom'
 
@@ -14,6 +14,10 @@ function App() {
       <Route path="/anime/:id">
         <Navbar/>
         <AnimeDetails/>
+      </Route>
+      <Route path="/favorites">
+        <Navbar/>
+        <AnimeFavorites/>
       </Route>
       <Route path="/anime-search/:query">
         <Navbar/>

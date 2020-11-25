@@ -2,9 +2,7 @@ import React from 'react'
 import { AnimeItem } from '../components/index'
 import useFetch from '../helpers/useFetch'
 
-function AnimeList(props) {
-  const { goToShowAnimeDetails } = props
-  // const [animeList, setAnimeList] = useState([])
+function AnimeList() {
 
   const [animeList, loading] = useFetch(
     'https://api.jikan.moe/v3/season/2020/summer',
@@ -44,7 +42,6 @@ function AnimeList(props) {
               key={anime.mal_id}
               i={i}
               anime={anime}
-              goToShowAnimeDetails={goToShowAnimeDetails}
             /> 
           ))
         }
