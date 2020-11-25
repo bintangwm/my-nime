@@ -25,7 +25,6 @@ function useFetch(url, order) {
             }
             break;
           case 'animeSearch':
-            console.log(url);
             for (let i = 0; i < 12; i++) {
               newData.push(res.results[i])
             }

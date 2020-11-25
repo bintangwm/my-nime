@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { FavoriteLogo } from './index'
 
 function AnimeItem(props) {
   const { anime } = props
@@ -15,7 +16,10 @@ function AnimeItem(props) {
       <div className="card mb-3">
         <img onClick={ (e) => goToShowAnimeDetails(e, anime.mal_id) }  src={ anime.image_url } className="card-img-top" alt={anime.title}/>
         <div className='card-body'>
-          <div style={{textAlign: 'center'}}>{ anime.title }</div>
+          <div style={{ textAlign: 'center' }}>{ anime.title }</div>
+          <FavoriteLogo
+            anime={ anime }
+          />
         </div>
       </div>
     </div> 
