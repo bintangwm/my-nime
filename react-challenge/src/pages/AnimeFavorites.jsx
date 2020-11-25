@@ -7,7 +7,7 @@ function AnimeFavorites() {
 
   if (favorites.length === 0) {
     return (
-      <div className="container mb-3">
+      <div className="container">
         <h2>My Favorites</h2>
         <hr/>
         <div className="alert alert-info" role="alert">
@@ -18,7 +18,7 @@ function AnimeFavorites() {
   }
 
   return (
-    <div className="container mb-3">
+    <div className="container">
       <h2>My Favorites</h2>
       <hr/>
       <div className="row">

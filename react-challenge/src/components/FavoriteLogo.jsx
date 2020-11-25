@@ -8,7 +8,6 @@ function FavoriteLogo(props) {
   const dispatch = useDispatch()
   const favorites = useSelector((state) => state.favorites)
   const found = favorites.find(el => el.mal_id === anime.mal_id)
-
   function addToFavorites(e) {
     dispatch(addFavorite(anime))
   }
@@ -19,11 +18,11 @@ function FavoriteLogo(props) {
 
   if (found) {
     return (
-      <i onClick={ (e) => removeFromFavorites(e) } className="fas fa-heart" style={{fontSize:'2em', color: 'red', cursor: 'pointer'}}></i>
+      <i onClick={ (e) => removeFromFavorites(e) } className="fas fa-heart anime-item-favorite" style={{ color: 'red' }}></i>
     )
   } else {
     return (
-      <i onClick={ (e) => addToFavorites(e) } className="fas fa-heart" style={{fontSize:'2em', cursor: 'pointer'}}></i>
+      <i onClick={ (e) => addToFavorites(e) } className="fas fa-heart anime-item-favorite"></i>
     )
   }
 }

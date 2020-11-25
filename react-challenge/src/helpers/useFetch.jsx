@@ -11,9 +11,7 @@ function useFetch(url, order) {
         if (res.ok) {
           return res.json()
         } else {
-          return Promise.reject({
-            res
-          })
+          return Promise.reject({ res })
         }
       })
       .then(res => {

@@ -11,7 +11,7 @@ function AnimeList() {
 
   if (loading) {
     return (
-      <div className="container mb-3">
+      <div className="container">
         <h2>Anime Detail</h2>
         <hr/>
         <div className="alert alert-info" role="alert">
@@ -21,7 +21,7 @@ function AnimeList() {
     )
   } else if (animeList.length === 0) {
     return (
-      <div className="container mb-3">
+      <div className="container">
         <h2>Anime Detail</h2>
         <hr/>
         <div className="alert alert-danger" role="alert">
@@ -32,10 +32,10 @@ function AnimeList() {
   }
 
   return (
-    <div className="container mb-3">
+    <div className="container">
       <h2>Anime List</h2>
       <hr/>
-      <div className="row">
+      <div className="row justify-content-center">
         {
           animeList.map((anime, i) => (
             <AnimeItem

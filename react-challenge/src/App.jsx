@@ -4,6 +4,7 @@ import { Navbar } from './components/index'
 import { Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import './App.css';
 
 function App() {
 

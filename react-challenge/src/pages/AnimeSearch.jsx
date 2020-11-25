@@ -19,7 +19,7 @@ function AnimeSearch() {
 
   if (loading) {
     return (
-      <div className="animeDetail container mb-3">
+      <div className="container">
         <h2>Search Result</h2>
         <hr/>
         <div className="alert alert-info" role="alert">
@@ -29,7 +29,7 @@ function AnimeSearch() {
     )
   } else if (animeList.length > 0) {
     return (
-      <div className="container-fluid mb-3">
+      <div className="container">
         <h2>Search Result</h2>
         <hr/>
         <div className="row">
@@ -48,7 +48,7 @@ function AnimeSearch() {
     )
   } else {
     return (
-      <div className="animeDetail container mb-3">
+      <div className="container">
         <h2>Search Result</h2>
         <hr/>
         <div className="alert alert-danger" role="alert">

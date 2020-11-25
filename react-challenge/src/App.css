@@ -1,38 +1,57 @@
-/* .App {
-  text-align: center;
+.container {
+  margin-top: 2%;
+  width: 80%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card {
+  margin-bottom: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.anime-item-title{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  height: 3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.anime-item-card {
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.anime-item-favorite{
+  cursor: pointer;
+  font-size: 2rem;
+  position: absolute;
+  top: 3px;
+  left: 3px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.card-body {
+  padding-top: 2px;
+}
+
+.inner {
+  overflow: hidden;
+  height: 22rem;
+}
+
+.inner img{
+  transition: all 1.5s ease;
+}
+
+.inner:hover img{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.anime-detail-image{
+  position: relative;
+  height: 80%;
+}
+
+.anime-detail-image img{
+  width: 100%;
+}

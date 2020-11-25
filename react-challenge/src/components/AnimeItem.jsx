@@ -12,14 +12,16 @@ function AnimeItem(props) {
   }
 
   return (
-    <div key={anime.mal_id} className="col-3">
-      <div className="card mb-3">
-        <img onClick={ (e) => goToShowAnimeDetails(e, anime.mal_id) }  src={ anime.image_url } className="card-img-top" alt={anime.title}/>
-        <div className='card-body'>
-          <div style={{ textAlign: 'center' }}>{ anime.title }</div>
-          <FavoriteLogo
+    <div key={anime.mal_id} className="col-md-3">
+      <div className="card shadow anime-item-card">
+        <div className="inner">
+          <img onClick={ (e) => goToShowAnimeDetails(e, anime.mal_id) }  src={ anime.image_url } className="card-img-top" alt={anime.title}/>  
+        </div>
+        <FavoriteLogo
             anime={ anime }
           />
+        <div className='card-body'>
+          <div className="anime-item-title" style={{ textAlign: 'center' }}>{ anime.title }</div>
         </div>
       </div>
     </div> 
