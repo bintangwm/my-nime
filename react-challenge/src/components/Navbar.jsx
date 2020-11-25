@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
-function Navbar(props) {
-  const { goToSearchAnime, handleSearchQuery, searchQuery, changePage } = props
+function Navbar() {
+  const [searchQuery, setSearchQuery] = useState('') 
+  const history = useHistory()
+  function handleSearchQuery(e) {
+    setSearchQuery(e.target.value)
+  } 
+
+  function goToAnimeList(e) {
+    e.preventDefault()
+    history.push(`/`)
+  }
+
+  function goToSearchAnime(e) {
+    e.preventDefault()
+    history.push(`/anime-search/${searchQuery}`)
+  }
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <a onClick={ (e) => changePage(e, 'AnimeList') } href="/#" className="navbar-brand" >Nime Site</a>
+      <a onClick={ (e) => goToAnimeList(e) } href="/#" className="navbar-brand" >Nime Site</a>
       <form onSubmit={ (e) => goToSearchAnime(e) } className="form-inline">
         <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
           value={ searchQuery }

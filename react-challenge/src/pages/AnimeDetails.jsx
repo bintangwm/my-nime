@@ -1,11 +1,12 @@
 import React from 'react'
 import useFetch from '../helpers/useFetch'
+import { useParams } from 'react-router-dom'
 
 function AnimeDetails(props) {
-  const { animeId } = props
+  const { id } = useParams()
 
   const [anime, loading] = useFetch(
-    `https://api.jikan.moe/v3/anime/${animeId}`
+    `https://api.jikan.moe/v3/anime/${id}`
   )
   
   if (loading) {

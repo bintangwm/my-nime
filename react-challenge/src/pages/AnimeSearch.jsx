@@ -1,14 +1,21 @@
 import React from 'react'
-import AnimeItem from '../components/AnimeItem'
+import { AnimeItem } from '../components/index'
 import useFetch from '../helpers/useFetch'
+import { useParams, useHistory } from 'react-router-dom'
 
-function AnimeSearch(props) {
-  const { goToShowAnimeDetails, searchQuery } = props
+function AnimeSearch() {
+  const { query:searchQuery } = useParams()
+  const history = useHistory()
 
   const [animeList, loading] = useFetch(
     `https://api.jikan.moe/v3/search/anime?q=${searchQuery}&page=1`,
     'animeSearch'
   )
+
+  function goToShowAnimeDetails(e, id) {
+    e.preventDefault()
+    history.push(`/anime/${id}`)
+  }
 
   if (loading) {
     return (
@@ -21,7 +28,6 @@ function AnimeSearch(props) {
       </div>
     )
   } else if (animeList.length > 0) {
-    console.log(searchQuery, 'query');
     return (
       <div className="container-fluid mb-3">
         <h2>Search Result</h2>
@@ -41,7 +47,6 @@ function AnimeSearch(props) {
       </div>
     )
   } else {
-    console.log(animeList);
     return (
       <div className="animeDetail container mb-3">
         <h2>Search Result</h2>

@@ -1,5 +1,5 @@
 import React from 'react'
-import AnimeItem from '../components/AnimeItem'
+import { AnimeItem } from '../components/index'
 import useFetch from '../helpers/useFetch'
 
 function AnimeList(props) {
