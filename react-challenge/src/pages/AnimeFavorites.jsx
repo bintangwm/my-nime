@@ -23,10 +23,9 @@ function AnimeFavorites() {
       <hr/>
       <div className="row">
         {
-          favorites.map((anime, i) => (
+          favorites.map((anime) => (
             <AnimeItem
               key={anime.mal_id}
-              i={i}
               anime={anime}
             /> 
           ))

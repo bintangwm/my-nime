@@ -1,46 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AnimeItem } from '../components/index'
-import useFetch from '../helpers/useFetch'
+// import useFetch from '../helpers/useFetch'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchAnimeList } from '../actions/index'
 
 function AnimeList() {
+  const animeList = useSelector((state) => state.animeList)
+  const loading = useSelector((state) => state.animeListLoading)
+  const error = useSelector((state) => state.animeListError)
 
-  const [animeList, loading] = useFetch(
-    'https://api.jikan.moe/v3/season/2020/summer',
-    'animeList'
-  )
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchAnimeList())
+  }, [dispatch])
 
   if (loading) {
     return (
       <div className="container">
-        <h2>Anime Detail</h2>
+        <h2>Anime List</h2>
         <hr/>
         <div className="alert alert-info" role="alert">
           Loading your data...
         </div>
       </div>
     )
-  } else if (animeList.length === 0) {
+  }
+  if (error) {
     return (
       <div className="container">
-        <h2>Anime Detail</h2>
+        <h2>Anime List</h2>
         <hr/>
         <div className="alert alert-danger" role="alert">
           There's a problem fetching data, please contact developer!
         </div>
       </div>
     )
-  }
-
+  } 
+  // if (animeList.length === 0) {
+  //   return (
+  //     <div className="container">
+  //       <h2>Anime List</h2>
+  //       <hr/>
+  //       <div className="alert alert-info" role="alert">
+  //         Data not found!
+  //       </div>
+  //     </div>
+  //   )
+  // }
   return (
     <div className="container">
       <h2>Anime List</h2>
       <hr/>
+      {/* { JSON.stringify(animeList)} */}
       <div className="row justify-content-center">
         {
-          animeList.map((anime, i) => (
+          animeList.map((anime) => (
             <AnimeItem
               key={anime.mal_id}
-              i={i}
               anime={anime}
             /> 
           ))

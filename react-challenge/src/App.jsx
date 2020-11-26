@@ -10,21 +10,18 @@ function App() {
 
   return (
     <Provider store={ store }>
+      <Navbar/>
       <Switch>
         <Route exact path="/">
-          <Navbar/>
           <AnimeList/>
         </Route>
         <Route path="/anime/:id">
-          <Navbar/>
           <AnimeDetails/>
         </Route>
         <Route path="/favorites">
-          <Navbar/>
           <AnimeFavorites/>
         </Route>
         <Route path="/anime-search/:query">
-          <Navbar/>
           <AnimeSearch/>
         </Route>
       </Switch>

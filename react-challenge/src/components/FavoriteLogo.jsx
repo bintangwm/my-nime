@@ -1,7 +1,6 @@
 import React from 'react'
 import { addFavorite, removeFavorite } from '../actions'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux' //untuk abil data
+import { useSelector, useDispatch } from 'react-redux' //untuk abil data
 
 function FavoriteLogo(props) {
   const { anime } = props

@@ -34,10 +34,9 @@ function AnimeSearch() {
         <hr/>
         <div className="row">
           {
-            animeList.map((anime, i) => (
+            animeList.map((anime) => (
               <AnimeItem
                 key={anime.mal_id}
-                i={i}
                 anime={anime}
                 goToShowAnimeDetails={goToShowAnimeDetails}
               /> 

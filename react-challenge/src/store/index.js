@@ -1,7 +1,11 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
 const initialState = {
-  favorites: []
+  favorites: [],
+  animeList: [],
+  animeListLoading: false,
+  animeListError: null
 }
 
 function reducer(state = initialState, action) {
@@ -13,11 +17,13 @@ function reducer(state = initialState, action) {
     case 'REMOVE_FAVORITE':
       newFavorites = state.favorites.filter(el => el.mal_id !== action.payload.anime.mal_id)
       return {...state, favorites: newFavorites }
+    case 'SET_ANIME_LIST':
+      return {...state, animeList: action.payload }
     default:
       return state
   }
 }
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk))
 
 export default store

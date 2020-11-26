@@ -1,10 +1,13 @@
 import React from 'react'
 import useFetch from '../helpers/useFetch'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory, Route, useRouteMatch } from 'react-router-dom'
 import { FavoriteLogo } from '../components/index'
+import { AnimeTrailer } from './index'
 
-function AnimeDetails(props) {
+function AnimeDetails() {
   const { id } = useParams()
+  const history = useHistory()
+  const { path, url } = useRouteMatch()
 
   const [anime, loading] = useFetch(
     `https://api.jikan.moe/v3/anime/${id}`
@@ -46,7 +49,7 @@ function AnimeDetails(props) {
           </div>
         </div>
         <div className="col-7">
-          <div className="card">
+          <div className="card anime-detail-detail">
             <div className="cardBody p-4">
               <h4>{ anime.title }</h4>
               <hr/>
@@ -66,17 +69,20 @@ function AnimeDetails(props) {
                   </tr>
                   <tr>
                     <td>synopsis</td>
-                    <td>{ anime.synopsis }</td>
+                    <td className="anime-item-synopsis">{ anime.synopsis }</td>
                   </tr>
                 </tbody>
               </table>
-              {/* <div className="embed-responsive embed-responsive-16by9">
-                <iframe className="embed-responsive-item" src={ anime.trailer_url }></iframe>
-              </div> */}
+              <button onClick={ () => history.push(`${url}/trailer`)} className="btn btn-info mt-5">Show Trailer</button>
             </div>
           </div>
         </div>
       </div>
+      <Route path={`${path}/trailer`} >
+        <AnimeTrailer
+          anime={ anime }
+        />
+      </Route>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState('') 
@@ -8,19 +9,9 @@ function Navbar() {
     setSearchQuery(e.target.value)
   } 
 
-  function goToAnimeList(e) {
-    e.preventDefault()
-    history.push(`/`)
-  }
-
   function goToSearchAnime(e) {
     e.preventDefault()
     history.push(`/anime-search/${searchQuery}`)
-  }
-
-  function goToAnimeFavorites(e) {
-    e.preventDefault()
-    history.push('/favorites')
   }
 
   return (
@@ -29,11 +20,14 @@ function Navbar() {
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a onClick={ (e) => goToAnimeList(e) } href="/#" className="nav-link" >Anime List</a>
+            <NavLink exact to="/" className="nav-link">
+              Anime List
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a onClick={ (e) => goToAnimeFavorites(e) } href="/#" className="nav-link" >Favorites</a>
-          </li>
+            <NavLink to="/favorites" className="nav-link">
+              Favorites
+            </NavLink></li>
         </ul>
         <form onSubmit={ (e) => goToSearchAnime(e) } className="form-inline">
           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
