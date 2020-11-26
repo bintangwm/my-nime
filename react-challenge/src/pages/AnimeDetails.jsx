@@ -3,6 +3,7 @@ import useFetch from '../helpers/useFetch'
 import { useParams, useHistory, Route, useRouteMatch } from 'react-router-dom'
 import { FavoriteLogo } from '../components/index'
 import { AnimeTrailer } from './index'
+import { TrailerContext } from '../context/index'
 
 function AnimeDetails() {
   const { id } = useParams()
@@ -78,11 +79,13 @@ function AnimeDetails() {
           </div>
         </div>
       </div>
-      <Route path={`${path}/trailer`} >
-        <AnimeTrailer
-          anime={ anime }
-        />
-      </Route>
+      <TrailerContext.Provider value={{ src: anime.trailer_url }}>
+        <Route path={`${path}/trailer`} >
+          <AnimeTrailer
+            anime={ anime }
+          />
+        </Route>
+      </TrailerContext.Provider>
     </div>
   )
 }
