@@ -36,7 +36,17 @@ export function fetchAnimeList() {
         })
       })
       .catch(err => {
-        console.log(err);
+        dispatch({ type: 'SET_ANIME_ERROR', payload: err })
       })
+      .finally(
+        dispatch({ type: 'SET_ANIME_LOADING', payload: false })
+      )
   }
 }
+
+// export function fetchAnimeList() {
+//   return {
+//           type: 'SET_ANIME_LIST',
+//           payload: []
+//   }
+// }

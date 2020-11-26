@@ -3,7 +3,19 @@ import { useSelector } from 'react-redux' //untuk abil data
 import { AnimeItem } from '../components/index'
 
 function AnimeFavorites() {
-  const favorites = useSelector((state) => state.favorites)
+  const favorites = useSelector((state) => state.favorites.favorites)
+
+  if (!favorites) {
+    return (
+      <div className="container">
+        <h2>My Favorites</h2>
+        <hr/>
+        <div className="alert alert-danger" role="alert">
+          There's a problem fetching data, please contact developer!
+        </div>
+      </div>
+    )
+  }
 
   if (favorites.length === 0) {
     return (

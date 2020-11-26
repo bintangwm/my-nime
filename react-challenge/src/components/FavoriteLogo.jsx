@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux' //untuk abil data
 function FavoriteLogo(props) {
   const { anime } = props
   const dispatch = useDispatch()
-  const favorites = useSelector((state) => state.favorites)
+  const favorites = useSelector((state) => state.favorites.favorites)
   const found = favorites.find(el => el.mal_id === anime.mal_id)
   function addToFavorites(e) {
     dispatch(addFavorite(anime))
