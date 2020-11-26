@@ -5,14 +5,28 @@ import { NavLink } from 'react-router-dom'
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState('') 
   const history = useHistory()
-  function handleSearchQuery(e) {
-    setSearchQuery(e.target.value)
-  } 
 
-  function goToSearchAnime(e) {
+  let goToSearchAnime = (e) => {
     e.preventDefault()
     history.push(`/anime-search/${searchQuery}`)
   }
+
+  // const debounce = (fn, delay) => {
+  //   let timer
+  //   return function (...args) {
+  //     clearTimeout(timer)
+  //     timer = setTimeout(() => {
+  //       fn(...args)
+  //     }, delay)
+  //   }
+  // }
+  
+  let handleSearchQuery = (e) => {
+    setSearchQuery(e.target.value)
+    // goToSearchAnime(e)
+  } 
+
+  // goToSearchAnime = debounce(goToSearchAnime, 2000)
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,6 +43,7 @@ function Navbar() {
               Favorites
             </NavLink></li>
         </ul>
+        {/* <form className="form-inline"> */}
         <form onSubmit={ (e) => goToSearchAnime(e) } className="form-inline">
           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
             value={ searchQuery }
