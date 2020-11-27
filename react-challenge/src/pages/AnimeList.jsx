@@ -42,7 +42,7 @@ function AnimeList() {
       <div className="container">
         <h2>Anime List</h2>
         <hr/>
-        <div className="alert alert-info" role="alert">
+        <div className="alert alert-info" data-testid="anime-list-content" role="alert">
           Data not found!
         </div>
       </div>
