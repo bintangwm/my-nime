@@ -1,0 +1,68 @@
+.container {
+  margin-top: 2%;
+  width: 80%;
+}
+
+.card {
+  margin-bottom: 2rem;
+}
+
+
+.anime-item-title{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  height: 3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.anime-item-card {
+  position: relative;
+}
+
+.anime-item-favorite{
+  cursor: pointer;
+  font-size: 2rem;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+
+.card-body {
+  padding-top: 2px;
+}
+
+.inner {
+  overflow: hidden;
+  height: 22rem;
+}
+
+.inner img{
+  transition: all 1.5s ease;
+}
+
+.inner:hover img{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.anime-detail-image{
+  position: relative;
+}
+
+.anime-detail-image img{
+  width: 100%;
+}
+
+.anime-item-synopsis{
+  height: 16rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.anime-detail-detail{
+  height: 100%;
+}
